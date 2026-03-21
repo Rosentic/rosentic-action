@@ -72,7 +72,19 @@ No cross-branch conflicts detected.
 | `scan-mode` | `pr` | `pr` checks the PR branch against all others. `full` checks all pairs. |
 | `format` | `markdown` | Output format: `markdown`, `text`, or `json` |
 | `stale-days` | `30` | Skip branches with no commits in N days. `0` to scan all. |
-| `block-on-conflict` | `true` | Exit with failure to block merge when conflicts found |
+| `mode` | `audit` | `audit` posts the report but always passes. `enforce` blocks merge on conflicts. |
+
+### Modes
+
+**audit** (default) -- Rosentic posts a PR comment but always exits with a green checkmark. New installs won't block merges until you're ready.
+
+**enforce** -- Rosentic posts a PR comment and fails the check when conflicts are found, blocking the merge. Opt in when you're confident in the results:
+
+```yaml
+- uses: coachescritique/rosentic-action@v1
+  with:
+    mode: enforce
+```
 
 ## Supported Languages
 

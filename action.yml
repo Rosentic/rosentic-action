@@ -19,10 +19,10 @@ inputs:
     description: 'Skip branches with no commits in the last N days. Set to 0 to scan all branches.'
     required: false
     default: '30'
-  block-on-conflict:
-    description: 'Exit with failure if conflicts are found, blocking the merge'
+  mode:
+    description: 'audit (default) posts the report but always passes. enforce blocks merge on conflicts.'
     required: false
-    default: 'true'
+    default: 'audit'
 
 runs:
   using: 'docker'
@@ -31,4 +31,4 @@ runs:
     SCAN_MODE: ${{ inputs.scan-mode }}
     FORMAT: ${{ inputs.format }}
     STALE_DAYS: ${{ inputs.stale-days }}
-    BLOCK_ON_CONFLICT: ${{ inputs.block-on-conflict }}
+    ROSENTIC_MODE: ${{ inputs.mode }}
