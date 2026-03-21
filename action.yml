@@ -1,0 +1,34 @@
+name: 'Rosentic - Cross-Branch Compatibility Check'
+description: 'Detects cross-branch compatibility conflicts between AI coding agents before they merge. AST-level analysis across 11 languages.'
+author: 'Rosentic'
+
+branding:
+  icon: 'shield'
+  color: 'red'
+
+inputs:
+  scan-mode:
+    description: 'Scan mode: pr (check PR branch against all others) or full (check all branch pairs)'
+    required: false
+    default: 'pr'
+  format:
+    description: 'Output format: markdown, text, or json'
+    required: false
+    default: 'markdown'
+  stale-days:
+    description: 'Skip branches with no commits in the last N days. Set to 0 to scan all branches.'
+    required: false
+    default: '30'
+  block-on-conflict:
+    description: 'Exit with failure if conflicts are found, blocking the merge'
+    required: false
+    default: 'true'
+
+runs:
+  using: 'docker'
+  image: 'docker://ghcr.io/coachescritique/rosentic-engine:latest'
+  env:
+    SCAN_MODE: ${{ inputs.scan-mode }}
+    FORMAT: ${{ inputs.format }}
+    STALE_DAYS: ${{ inputs.stale-days }}
+    BLOCK_ON_CONFLICT: ${{ inputs.block-on-conflict }}
