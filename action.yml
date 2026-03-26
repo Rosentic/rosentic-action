@@ -26,7 +26,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://ghcr.io/coachescritique/rosentic-engine:latest'
+  image: 'docker://ghcr.io/rosentic/rosentic-engine:latest'
   env:
     SCAN_MODE: ${{ inputs.scan-mode }}
     FORMAT: ${{ inputs.format }}

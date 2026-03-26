@@ -36,7 +36,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: coachescritique/rosentic-action@v1
+      - uses: Rosentic/rosentic-action@v1
 ```
 
 One workflow file. No signup. No API key. No account. On every PR, Rosentic scans the PR branch against all active branches and posts the results.
@@ -95,7 +95,7 @@ No cross-branch conflicts detected.
 **enforce** - Rosentic posts a PR comment and fails the check when conflicts are found, blocking the merge. Opt in when you're confident in the results:
 
 ```yaml
-- uses: coachescritique/rosentic-action@v1
+- uses: Rosentic/rosentic-action@v1
   with:
     mode: enforce
 ```
@@ -129,10 +129,10 @@ Cross-language detection currently supports HTTP route matching: Python (FastAPI
 - [Risk Check](https://rosentic.com/fit) - 30-second diagnostic
 - [How It Works](https://rosentic.com/how-it-works)
 - [Documentation](https://rosentic.com/docs)
-- [Demo Repo](https://github.com/coachescritique/rosentic-demo) - 114 conflicts across 11 branches
+- [Demo Repo](https://github.com/Rosentic/rosentic-demo) - 114 conflicts across 11 branches
 
 ---
 
-**If Rosentic caught something useful, [star this repo](https://github.com/coachescritique/rosentic-action) - it helps us reach more engineers.**
+**If Rosentic caught something useful, [star this repo](https://github.com/Rosentic/rosentic-action) - it helps us reach more engineers.**
 
 🌹 Rosentic - The agent output pipeline
