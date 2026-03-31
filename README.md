@@ -5,7 +5,7 @@
 Rosentic detects cross-branch compatibility conflicts before they merge. When multiple AI coding agents push changes in parallel, they create invisible breaks between branches that CI pipelines miss. Rosentic catches them.
 
 - AST-level analysis across 11 languages (Python, TypeScript, JavaScript, Go, Ruby, Java, Kotlin, Swift, Rust, C#, C++)
-- 5 detection layers: function signatures (live), HTTP APIs (live), GraphQL schemas (coming soon), Pydantic/Zod contracts (coming soon), protobuf/gRPC (coming soon)
+- 5 detection layers: function signatures (live), HTTP APIs (live), GraphQL schemas (beta), Pydantic/Zod contracts (beta), protobuf/gRPC (beta)
 - Cross-language detection (backend routes matched to frontend API calls)
 - Runs on your GitHub runners. Your code never leaves your environment.
 - Posts a PR comment with a detailed conflict report
@@ -49,13 +49,13 @@ Agent A changes `create_order()` from 2 to 3 parameters. Agent B's branch still 
 **API contract conflicts (L2)**
 Agent A changes a Python backend endpoint to require `shipping_address`. Agent B's TypeScript frontend still sends the old payload. Git merges both cleanly. The app crashes at runtime.
 
-**GraphQL schema conflicts (L3a)** *(coming soon)*
+**GraphQL schema conflicts (L3a)** *(beta)*
 Agent A renames a field in the GraphQL schema. Agent B writes queries referencing the old field name. Both pass CI. API breaks on merge.
 
-**Typed contract conflicts (L3b)** *(coming soon)*
+**Typed contract conflicts (L3b)** *(beta)*
 Agent A changes a Pydantic model or Zod schema. Agent B's code still sends the old shape. Validation fails at runtime.
 
-**Protobuf/gRPC conflicts (L3c)** *(coming soon)*
+**Protobuf/gRPC conflicts (L3c)** *(beta)*
 Agent A modifies a .proto message definition. Agent B's generated client still uses the old fields. Silent data corruption after merge.
 
 ## Example Output
