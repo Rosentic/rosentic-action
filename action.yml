@@ -1,5 +1,5 @@
 name: 'Rosentic - Cross-Branch Compatibility Check'
-description: 'Detects cross-branch compatibility conflicts between AI coding agents before they merge. AST-level analysis across 11 languages.'
+description: 'Catches when changes across branches break each other before merge. CI checks branches alone. Rosentic checks them together.'
 author: 'Rosentic'
 
 branding:
