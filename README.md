@@ -61,7 +61,7 @@ When clean: `Rosentic Scan - Clean. No cross-branch conflicts detected.`
 
 ## Security
 
-Your code never leaves your environment. The engine runs as a Docker container on GitHub's ephemeral runners. No telemetry. No data collection.
+Your code never leaves your environment. The engine runs as a Docker container on GitHub's ephemeral runners. The only data sent externally is scan metadata: timestamp, organization name, repository name, branch count, conflict count, scan duration, and detected agent type. No source code, file paths, or function names are transmitted.
 
 ## Links
 
