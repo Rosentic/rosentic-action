@@ -36,6 +36,10 @@ No signup. No API key. No account.
 - **Detects breaking changes** — function signature mismatches, API contract conflicts, schema divergence
 - **Posts a PR comment** showing exactly which branches conflict and why
 
+## What it does NOT do
+
+Rosentic does not catch text merge conflicts. Git already does that. Rosentic catches semantic breaks that Git and CI miss, like when one branch changes a function signature and another branch still calls the old version.
+
 ## What you'll see
 
 When conflicts exist:
