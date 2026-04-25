@@ -32,7 +32,7 @@ No signup. No API key. No account.
 
 ## What it does
 
-- **Parses every active branch** using tree-sitter AST analysis across 11 languages
+- **Parses every active branch** using tree-sitter AST analysis across 12 languages
 - **Detects breaking changes** — function signature mismatches, API contract conflicts, schema divergence
 - **Posts a PR comment** showing exactly which branches conflict and why
 
