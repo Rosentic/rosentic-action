@@ -4,6 +4,8 @@ Catches when changes across branches break each other before merge.
 
 CI tests branches alone. Rosentic tests them together.
 
+**860+ scans** across **10 organizations** and **21 repos**. Zero false positives.
+
 ## Install
 
 Add `.github/workflows/rosentic.yml` to your repo:
@@ -30,11 +32,19 @@ jobs:
 
 No signup. No API key. No account.
 
-## What it does
+## What it detects
 
-- **Parses every active branch** using tree-sitter AST analysis across 12 languages
-- **Detects breaking changes** — function signature mismatches, API contract conflicts, schema divergence
-- **Posts a PR comment** showing exactly which branches conflict and why
+Three layers of cross-branch conflict detection, all powered by tree-sitter AST analysis across 12 languages.
+
+**L1 — Signature conflicts.** One branch changes a function signature. Another branch still calls the old version. Rosentic catches the mismatch before merge.
+
+**L2 — Route conflicts.** One branch renames or removes an API endpoint. Another branch still calls it. Works across frontend/backend boundaries.
+
+**L3 — Schema conflicts.** One branch drops a protobuf field, GraphQL type, or OpenAPI parameter. Another branch still references it.
+
+Each finding gets a verdict:
+- **UNSAFE** — confirmed breaking change with evidence
+- **WARNING** — potential conflict, advisory
 
 ## What it does NOT do
 
@@ -42,18 +52,21 @@ Rosentic does not catch text merge conflicts. Git already does that. Rosentic ca
 
 ## What you'll see
 
-When conflicts exist:
+Rosentic posts inline review comments directly on the PR diff where conflicts occur, plus a summary comment with all findings:
 
 ```
-Rosentic Scan - 4 conflict(s) found
+⚠ Rosentic — 3 unique finding(s) across 4 branch pairs
 
-agent/alice <> agent/bob
-Type           | Source                           | Target                     | Detail
-SIGNATURE      | backend/main.py:create_order()   | backend/bulk_orders.py L7  | Requires 3 args, caller sends 2
-API CONTRACT   | backend/main.py:order_endpoint() | frontend/api.ts:/api/order | Param shipping_address missing
+  UNSAFE  L1  create_order(customer, items, shipping) — 2 callers still pass 2 args
+  UNSAFE  L2  POST /api/order — param shipping_address removed, 1 consumer affected
+  WARNING L1  validate_input(data) — 1 advisory caller via reflection
 ```
 
-When clean: `Rosentic Scan - Clean. No cross-branch conflicts detected.`
+When clean: `Rosentic Scan — Clean. No cross-branch conflicts detected.`
+
+## Languages
+
+Go, Python, TypeScript, JavaScript, Java, Kotlin, C#, Rust, Swift, C++, Ruby, PHP.
 
 ## Configuration
 
@@ -62,6 +75,7 @@ When clean: `Rosentic Scan - Clean. No cross-branch conflicts detected.`
 | `mode` | `audit` | `audit` reports conflicts but passes. `enforce` blocks merge. |
 | `scan-mode` | `pr` | `pr` checks PR branch vs others. `full` checks all pairs. |
 | `stale-days` | `30` | Skip branches with no commits in N days. |
+| `format` | `markdown` | Output format: `markdown`, `text`, or `json`. |
 
 ## Security
 
