@@ -4,7 +4,7 @@ Catches when changes across branches break each other before merge.
 
 CI tests branches alone. Rosentic tests them together.
 
-**860+ scans** across **10 organizations** and **21 repos**.
+**1,250+ scans** across **10 organizations** and **21 repos**.
 
 ## Install
 
