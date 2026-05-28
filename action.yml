@@ -8,9 +8,13 @@ branding:
 
 inputs:
   scan-mode:
-    description: 'Scan mode: pr (check PR branch against all others) or full (check all branch pairs)'
+    description: 'Scan mode: pr (check PR branch against all others), full (check all branch pairs), or siblings (check specific branches against each other)'
     required: false
     default: 'pr'
+  branches:
+    description: 'Comma-separated branch names for siblings mode. Required when scan-mode is siblings.'
+    required: false
+    default: ''
   format:
     description: 'Output format: markdown, text, or json'
     required: false
@@ -29,6 +33,7 @@ runs:
   image: 'docker://ghcr.io/rosentic/rosentic-engine:latest'
   env:
     SCAN_MODE: ${{ inputs.scan-mode }}
+    ROSENTIC_BRANCHES: ${{ inputs.branches }}
     FORMAT: ${{ inputs.format }}
     STALE_DAYS: ${{ inputs.stale-days }}
     ROSENTIC_MODE: ${{ inputs.mode }}
