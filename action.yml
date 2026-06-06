@@ -27,6 +27,10 @@ inputs:
     description: 'audit (default) posts the report but always passes. enforce blocks merge on conflicts.'
     required: false
     default: 'audit'
+  api-key:
+    description: 'Rosentic API key for dashboard telemetry. Get one at https://api.rosentic.com/settings'
+    required: false
+    default: ''
 
 runs:
   using: 'docker'
@@ -37,3 +41,4 @@ runs:
     FORMAT: ${{ inputs.format }}
     STALE_DAYS: ${{ inputs.stale-days }}
     ROSENTIC_MODE: ${{ inputs.mode }}
+    ROSENTIC_API_KEY: ${{ inputs.api-key }}
