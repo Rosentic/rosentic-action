@@ -31,6 +31,10 @@ inputs:
     description: 'Rosentic API key for dashboard telemetry. Get one at https://api.rosentic.com/settings'
     required: false
     default: ''
+  active-only:
+    description: 'Only scan branches with open PRs (live siblings). Keeps signal from drowning in abandoned-branch noise. Set to false for full repo-wide debt sweeps.'
+    required: false
+    default: 'true'
 
 runs:
   using: 'docker'
@@ -42,3 +46,4 @@ runs:
     STALE_DAYS: ${{ inputs.stale-days }}
     ROSENTIC_MODE: ${{ inputs.mode }}
     ROSENTIC_API_KEY: ${{ inputs.api-key }}
+    ACTIVE_ONLY: ${{ inputs.active-only }}

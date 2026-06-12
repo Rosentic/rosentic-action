@@ -74,12 +74,33 @@ Go, Python, TypeScript, JavaScript, Java, Kotlin, C#, Rust, Swift, C++, Ruby, PH
 |-------|---------|-------------|
 | `mode` | `audit` | `audit` reports conflicts but passes. `enforce` blocks merge. |
 | `scan-mode` | `pr` | `pr` checks PR branch vs others. `full` checks all pairs. |
-| `stale-days` | `30` | Skip branches with no commits in N days. |
+| `active-only` | `true` | Only scan branches with open PRs (live siblings). Set `false` for full repo-wide debt sweeps. |
+| `stale-days` | `30` | Skip branches with no commits in N days. Applied when `active-only` is `false`. |
 | `format` | `markdown` | Output format: `markdown`, `text`, or `json`. |
+
+### Why active-only is the default
+
+Without `active-only`, every scan compares your PR against all remote branches - including abandoned experiments and stale feature branches nobody plans to merge. The result: real conflicts between live work get drowned in debt-vs-debt noise.
+
+With `active-only: true`, Rosentic queries the GitHub API for branches with open PRs and scans only those. Your PR is checked against work that is actually heading toward merge, not against branches from three months ago.
+
+To run a full repo-wide sweep (nightly debt audits, etc.), set `active-only: false`:
+
+```yaml
+- uses: Rosentic/rosentic-action@v1
+  with:
+    active-only: 'false'
+```
+
+If the GitHub API call fails (restricted token permissions), Rosentic falls back to all-branches automatically and logs a warning. The scan never fails over scoping.
 
 ## Security
 
-Your code never leaves your environment. The engine runs as a Docker container on GitHub's ephemeral runners. The only data sent externally is scan metadata: timestamp, organization name, repository name, branch count, conflict count, scan duration, and detected agent type. No source code, file paths, or function names are transmitted.
+The engine runs as a Docker container on GitHub's ephemeral runners. Without an API key, source code does not leave the runner and only aggregate scan metadata is sent externally.
+
+When a Rosentic API key is configured, scan evidence is uploaded to the Rosentic dashboard. That evidence includes metadata such as file paths, function names, route paths, schema fields, lifecycle status, and branch attribution. Source file contents and raw diffs are not uploaded.
+
+See `docs/data-egress.md` in the Rosentic engine repository for the full mode-by-mode data egress description.
 
 ## Links
 
