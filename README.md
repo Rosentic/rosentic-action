@@ -34,7 +34,7 @@ No signup. No API key. No account.
 
 ## What it detects
 
-Three layers of cross-branch conflict detection, all powered by tree-sitter AST analysis across 12 languages.
+Three layers of cross-branch conflict detection, all powered by tree-sitter AST analysis across 13 languages.
 
 **L1 — Signature conflicts.** One branch changes a function signature. Another branch still calls the old version. Rosentic catches the mismatch before merge.
 
