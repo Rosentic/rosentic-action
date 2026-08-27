@@ -48,3 +48,4 @@ runs:
     ROSENTIC_MODE: ${{ inputs.mode }}
     ROSENTIC_API_KEY: ${{ inputs.api-key }}
     ACTIVE_ONLY: ${{ inputs.active-only }}
+    GITHUB_BASE_REF: ${{ github.base_ref }}
