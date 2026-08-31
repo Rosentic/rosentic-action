@@ -39,7 +39,7 @@ inputs:
 runs:
   using: 'docker'
   # Pinned to an immutable digest (was :latest). Bump this on each engine release.
-  image: 'docker://ghcr.io/rosentic/rosentic-engine@sha256:dbe2994600d09c05a6e0ff90717be5b6dead4e2cdf4e00835b86953deb826d63'
+  image: 'docker://ghcr.io/rosentic/rosentic-engine@sha256:61108611a810ae1e4c8345bc4c6fe9ee13b0076a7d3f929c06b0a4a156ad4bb0'
   env:
     SCAN_MODE: ${{ inputs.scan-mode }}
     ROSENTIC_BRANCHES: ${{ inputs.branches }}
