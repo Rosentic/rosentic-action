@@ -39,7 +39,7 @@ inputs:
 runs:
   using: 'docker'
   # Pinned to an immutable digest (was :latest). Bump this on each engine release.
-  image: 'docker://ghcr.io/rosentic/rosentic-engine@sha256:b289a0f3b662f21683c7add158115b14fd2a8526445b9ae24ff49957ebbad5fb'
+  image: 'docker://ghcr.io/rosentic/rosentic-engine@sha256:0e008e3f35748716aa763490b387bc8dc2ce72e96c0ed49753efe92d3efb4193'
   env:
     SCAN_MODE: ${{ inputs.scan-mode }}
     ROSENTIC_BRANCHES: ${{ inputs.branches }}
@@ -51,4 +51,4 @@ runs:
     # Receipt identity (Required-Check Contract s17): the immutable digest of
     # the image line above, updated together at every repin so each verdict
     # names the exact executable that produced it.
-    ROSENTIC_ENGINE_DIGEST: 'sha256:b289a0f3b662f21683c7add158115b14fd2a8526445b9ae24ff49957ebbad5fb'
+    ROSENTIC_ENGINE_DIGEST: 'sha256:0e008e3f35748716aa763490b387bc8dc2ce72e96c0ed49753efe92d3efb4193'
